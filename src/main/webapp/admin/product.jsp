@@ -121,7 +121,7 @@
                             <nav aria-label="..." style="text-align:center;">
                                 <ul class="pagination">
                                     <li>
-                                            <%--                                        <a href="${pageContext.request.contextPath}/prod/split.action?page=${info.prePage}" aria-label="Previous">--%>
+                                            <%--<a href="${pageContext.request.contextPath}/prod/split.action?page=${info.prePage}" aria-label="Previous">--%>
                                         <a href="javascript:ajaxsplit(${info.prePage})" aria-label="Previous">
 
                                             <span aria-hidden="true">«</span></a>
@@ -129,7 +129,7 @@
                                     <c:forEach begin="1" end="${info.pages}" var="i">
                                         <c:if test="${info.pageNum==i}">
                                             <li>
-                                                    <%--                                                <a href="${pageContext.request.contextPath}/prod/split.action?page=${i}" style="background-color: grey">${i}</a>--%>
+                                                    <%--<a href="${pageContext.request.contextPath}/prod/split.action?page=${i}" style="background-color: grey">${i}</a>--%>
                                                 <a href="javascript:ajaxsplit(${i})"
                                                    style="background-color: grey">${i}</a>
                                             </li>
@@ -154,7 +154,7 @@
                                         </c:if>
                                         <c:if test="${info.pageNum==0}">
                                             当前&nbsp;&nbsp;&nbsp;<font
-                                            style="color:orange;">1</font>&nbsp;&nbsp;&nbsp;页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            style="color:orange;">1</font>&nbsp;页&nbsp;
                                         </c:if>
                                     </li>
                                 </ul>
@@ -222,13 +222,13 @@ alert(str+"11111111");
     function ajaxsplit(page) {
         //异步ajax分页请求
         $.ajax({
-        url:"${pageContext.request.contextPath}/prod/ajaxsplit.action",
+        url:"${pageContext.request.contextPath}/prod/ajaxSplit.action",
             data:{"page":page},
             type:"post",
             success:function () {
                 //重新加载分页显示的组件table
                 //location.href---->http://localhost:8080/admin/login.action
-                $("#table").load("http://localhost:8080/admin/product.jsp #table");
+                $("#table").load("http://localhost:8080/mimissm/admin/product.jsp #table");
             }
         })
     };
