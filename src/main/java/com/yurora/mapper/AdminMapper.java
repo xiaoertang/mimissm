@@ -2,11 +2,12 @@ package com.yurora.mapper;
 
 import com.yurora.pojo.Admin;
 import com.yurora.pojo.AdminExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface AdminMapper {
-    long countByExample(AdminExample example);
+    int countByExample(AdminExample example);
 
     int deleteByExample(AdminExample example);
 

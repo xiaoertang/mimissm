@@ -18,6 +18,6 @@ public class ProductType {
     }
 
     public void setTypeName(String typeName) {
-        this.typeName = typeName;
+        this.typeName = typeName == null ? null : typeName.trim();
     }
 }

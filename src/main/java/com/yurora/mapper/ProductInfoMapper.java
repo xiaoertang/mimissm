@@ -2,11 +2,13 @@ package com.yurora.mapper;
 
 import com.yurora.pojo.ProductInfo;
 import com.yurora.pojo.ProductInfoExample;
-import java.util.List;
+import com.yurora.pojo.vo.ProductVo;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface ProductInfoMapper {
-    long countByExample(ProductInfoExample example);
+    int countByExample(ProductInfoExample example);
 
     int deleteByExample(ProductInfoExample example);
 
@@ -27,4 +29,10 @@ public interface ProductInfoMapper {
     int updateByPrimaryKeySelective(ProductInfo record);
 
     int updateByPrimaryKey(ProductInfo record);
+
+    //实现多条件查询
+    public List<ProductInfo> selectConditionSplitPage(ProductVo vo);
+
+    //批量删除
+    public int deleteBatch(String[] pids);
 }

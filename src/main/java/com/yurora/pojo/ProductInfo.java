@@ -32,7 +32,7 @@ public class ProductInfo {
     }
 
     public void setpName(String pName) {
-        this.pName = pName;
+        this.pName = pName == null ? null : pName.trim();
     }
 
     public String getpContent() {
@@ -40,7 +40,7 @@ public class ProductInfo {
     }
 
     public void setpContent(String pContent) {
-        this.pContent = pContent;
+        this.pContent = pContent == null ? null : pContent.trim();
     }
 
     public Integer getpPrice() {
@@ -56,7 +56,7 @@ public class ProductInfo {
     }
 
     public void setpImage(String pImage) {
-        this.pImage = pImage;
+        this.pImage = pImage == null ? null : pImage.trim();
     }
 
     public Integer getpNumber() {

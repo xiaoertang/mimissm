@@ -5,6 +5,7 @@ import com.yurora.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,8 +19,9 @@ import javax.servlet.http.HttpServletRequest;
 public class AdminAction {
     @Autowired
     private AdminService adminService;
+
     //实现登录判断，并进行相应的跳转
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
     public String login(String name, String pwd, HttpServletRequest request){
         Admin admin  = adminService.login(name,pwd);
         if(admin != null){
