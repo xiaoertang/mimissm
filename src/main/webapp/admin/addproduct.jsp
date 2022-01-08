@@ -109,10 +109,10 @@
 						
 						
 						<tr>
-							<td class="one">类别</td>
+							<td class="one"></td>
 							<td>
 								<select name="typeId">
-									<c:forEach items="${ptlist}" var="type">
+									<c:forEach items="${typeList}" var="type">
 										<option value="${type.typeId}">${type.typeName}</option>
 									</c:forEach>
 								</select>
