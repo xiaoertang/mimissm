@@ -17,7 +17,7 @@
         function fileChange(){//注意：此处不能使用jQuery中的change事件，因此仅触发一次，因此使用标签的：onchange属性
            alert("change");
             $.ajaxFileUpload({
-                url: '/prod/ajaxImg.action',//用于文件上传的服务器端请求地址
+                url: "${pageContext.request.contextPath}/prod/ajaxImg.action",//用于文件上传的服务器端请求地址
                 secureuri: false,//一般设置为false
                 fileElementId: 'pimage',//文件上传控件的id属性  <input type="file" id="pimage" name="pimage" />
                 dataType: 'json',//返回值类型 一般设置为json
@@ -112,6 +112,7 @@
 							<td class="one"></td>
 							<td>
 								<select name="typeId">
+									<option value="-1">请选择</option>
 									<c:forEach items="${typeList}" var="type">
 										<option value="${type.typeId}">${type.typeName}</option>
 									</c:forEach>
