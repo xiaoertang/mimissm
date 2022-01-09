@@ -228,7 +228,7 @@ alert(str+"11111111");
             success:function () {
                 //重新加载分页显示的组件table
                 //location.href---->http://localhost:8080/admin/login.action
-                $("#table").load("http://localhost:8080/mimissm/admin/product.jsp #table");
+                $("#table").load("http://localhost:8080/admin/product.jsp #table");
             }
         })
     };
