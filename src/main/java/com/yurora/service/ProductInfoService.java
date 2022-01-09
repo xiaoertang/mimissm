@@ -27,4 +27,7 @@ public interface ProductInfoService {
 
     //单个商品删除
     int delete(int pid);
+
+    //批量删除商品
+    int deleteBatch(String []pids);
 }

@@ -28,16 +28,16 @@
         //取得全选复选框的选中未选 中状态
         var ischeck = $("#all").prop("checked");
         //将此状态赋值给每个商品列表里的复选框
-        $("input[name=ck]").each(function () {
+        $("input[name='ck']").each(function () {
             this.checked = ischeck;
         });
     }
 
     function ckClick() {
         //取得所有name=ck的被选中的复选框
-        var length = $("input[name=ck]:checked").length;
-//取得所有name=ck的复选框
-        var len = $("input[name=ck]").length;
+        var length = $("input[name='ck']:checked").length;
+        //取得所有name=ck的复选框
+        var len = $("input[name='ck']").length;
         //比较
         if (len == length) {
             $("#all").prop("checked", true);
@@ -94,8 +94,9 @@
                         </tr>
                         <c:forEach items="${info.list}" var="p">
                             <tr>
-                                <td valign="center" align="center"><input type="checkbox" name="ck" id="ck"
-                                                                          value="${p.pId}" onclick="ckClick()"></td>
+                                <td valign="center" align="center">
+                                    <input type="checkbox" name="ck" id="ck" value="${p.pId}" onclick="ckClick()">
+                                </td>
                                 <td>${p.pName}</td>
                                 <td>${p.pContent}</td>
                                 <td>${p.pPrice}</td>
@@ -180,28 +181,34 @@
 
     //批量删除
     function deleteBatch() {
-
-        //取得所有被选中删除商品的pid
-        var zhi = $("input[name=ck]:checked");
-        var str = "";
-        var id = "";
-        if (zhi.length == 0) {
+        //得到所有选中复选框的对象，根据其长度判断是否有选中的商品
+        var cks = $("input[name='ck']:checked");
+        //如果有选中的的商品，则获得其value的值，进行字符串拼接
+        if (cks.length == 0){
             alert("请选择将要删除的商品！");
-        } else {
-            // 有选中的商品，则取出每个选 中商品的ID，拼提交的ID的数据
-            if (confirm("您确定删除" + zhi.length + "条商品吗？")) {
-                //拼接ID
-                $.each(zhi, function (index, item) {
-
-                    id = $(item).val(); //22 33
-                    alert(id);
-                    if (id != null)
-                        str += id + ",";  //22,33,44
+        }else{
+            var  str = "";
+            var id = "";
+            if (confirm("您确定要删除"+cks.length+"条商品吗？")){
+                //进行提交商品id的字符串的拼接
+                $.each(cks,function (){
+                    id = $(this).val(); //每一个被选中的商品的id
+                    if (id != null){
+                        str += id + ",";
+                    }
                 });
-                alert(str + "11111111");
-                //发送请求到服务器端
-                // window.location="${pageContext.request.contextPath}/prod/deletebatch.action?str="+str;
-
+                //发送Ajax请求，进行批量删除的提示
+                $.ajax({
+                    url:"${pageContext.request.contextPath}/prod/deleteBatch.action",
+                    data:{"pids":str},
+                    type:"post",
+                    dataType: "text",
+                    success:function (msg){
+                        alert(msg);//批量删除后的提示语
+                        //将页面上显示商品数据的容器重新加载
+                        $("#table").load("http://localhost:8080/admin/product.jsp #table");
+                    }
+                });
             }
         }
     }
@@ -214,10 +221,10 @@
             //发出Ajax的请求，进行删除操作
             $.ajax({
                 url: "${pageContext.request.contextPath}/prod/delete.action",
-                data: {"pid":pid},
-                type:"post",
-                dataType:"text",
-                success:function (msg){
+                data: {"pid": pid},
+                type: "post",
+                dataType: "text",
+                success: function (msg) {
                     alert(msg);
                     $("#table").load("http://localhost:8080/admin/product.jsp #table");
                 }

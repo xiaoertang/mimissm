@@ -182,15 +182,37 @@ public class ProductInfoAction {
             request.setAttribute("msg","删除失败！");
         }
         //删除结束后跳转到分页显示
-        return "forward:/prod/deleteAjax.action";
+        return "forward:/prod/deleteAjaxSplit.action";
     }
 
-    @RequestMapping(value = "/deleteAjax",produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/deleteAjaxSplit",produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public Object deleteAjax(HttpServletRequest request){
+    public Object deleteAjaxSplit(HttpServletRequest request){
         //取得第一页的数据
         PageInfo info = productInfoService.splitPage(1,PAGE_SIZE);
         request.getSession().setAttribute("info",info);
         return request.getAttribute("msg");
+    }
+
+    /**
+     * 批量删除商品
+     * @return
+     */
+    @RequestMapping("/deleteBatch")
+    public String deleteBatch(String pids,HttpServletRequest request){
+        //将请求的字符串分解，形成一个商品id字符数组
+        String []pid = pids.split(",");
+        int num = -1;
+        num = productInfoService.deleteBatch(pid);
+        try {
+            if(num > 0){
+                request.setAttribute("msg","批量删除成功！");
+            }else{
+                request.setAttribute("msg","批量删除失败！");
+            }
+        }catch (Exception e){
+            request.setAttribute("msg","商品不可删除！");
+        }
+        return "forward:/prod/deleteAjaxSplit.action";
     }
 }

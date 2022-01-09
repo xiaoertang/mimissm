@@ -66,4 +66,10 @@ public class ProductInfoServiceImpl implements ProductInfoService {
     public int delete(int pid) {
         return productInfoMapper.deleteByPrimaryKey(pid);
     }
+
+    @Override
+    public int deleteBatch(String[] pids) {
+
+        return productInfoMapper.deleteBatch(pids);
+    }
 }

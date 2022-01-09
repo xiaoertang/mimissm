@@ -30,9 +30,13 @@ public interface ProductInfoMapper {
 
     int updateByPrimaryKey(ProductInfo record);
 
-    //实现多条件查询
-    public List<ProductInfo> selectConditionSplitPage(ProductVo vo);
+    /**
+     * 实现多条件查询
+     */
+    List<ProductInfo> selectConditionSplitPage(ProductVo vo);
 
-    //批量删除
-    public int deleteBatch(String[] pids);
+    /**
+     * 批量删除
+     */
+    int deleteBatch(String[] pids);
 }
