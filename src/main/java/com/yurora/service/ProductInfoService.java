@@ -18,4 +18,10 @@ public interface ProductInfoService {
     PageInfo splitPage(int pageNum, int pageSize);
 
     int save(ProductInfo info);
+
+    //按主键id查询商品
+    ProductInfo getById(int pid);
+
+    //更新商品
+    int update(ProductInfo info);
 }

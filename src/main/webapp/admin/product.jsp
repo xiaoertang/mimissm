@@ -214,6 +214,7 @@ alert(str+"11111111");
     }
 
     function one(pid, ispage) {
+        // 向服务器提交请求，传递商品id
         location.href = "${pageContext.request.contextPath}/prod/one.action?pid=" + pid + "&page=" + ispage;
     }
 </script>
