@@ -24,4 +24,7 @@ public interface ProductInfoService {
 
     //更新商品
     int update(ProductInfo info);
+
+    //单个商品删除
+    int delete(int pid);
 }

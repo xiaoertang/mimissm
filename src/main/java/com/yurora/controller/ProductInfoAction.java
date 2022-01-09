@@ -167,4 +167,30 @@ public class ProductInfoAction {
         saveFileName = "";
         return "forward:/prod/split.action";
     }
+
+    @RequestMapping("/delete")
+    public String delete(int pid,HttpServletRequest request){
+        int num = -1;
+        try {
+            num = productInfoService.delete(pid);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        if(num > 0){
+            request.setAttribute("msg","删除成功！");
+        }else{
+            request.setAttribute("msg","删除失败！");
+        }
+        //删除结束后跳转到分页显示
+        return "forward:/prod/deleteAjax.action";
+    }
+
+    @RequestMapping(value = "/deleteAjax",produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public Object deleteAjax(HttpServletRequest request){
+        //取得第一页的数据
+        PageInfo info = productInfoService.splitPage(1,PAGE_SIZE);
+        request.getSession().setAttribute("info",info);
+        return request.getAttribute("msg");
+    }
 }
